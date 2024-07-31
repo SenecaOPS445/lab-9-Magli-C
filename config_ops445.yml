@@ -1,0 +1,51 @@
+- name: Lab 9 config
+  hosts: mcini
+  user: student
+  become: yes
+  vars:
+    password: "{{ 'Lonipepo123!' | password_hash('sha512') }}"
+    lab: [1,2,3,4,5,6,7,8,9]
+  tasks:
+    - name: Update Apache
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Install epel-release
+      yum:
+        name: epel-release
+        state: present
+
+    - name: tree
+      yum:
+        name: tree
+        state: absent
+
+    - name: set hostname
+      hostname:
+        name: "mcini"
+
+    - name: create new user mcini with sudo
+      ansible.builtin.user:
+        name: mcini
+        create_home: yes
+        groups: wheel
+        password: "{{ password }}"
+
+    - name: create .ssh directory
+      ansible.builtin.file:
+        path: /home/mcini/.ssh/
+        state: directory
+
+    - name: copy public key to mcini user
+      ansible.builtin.copy:
+        src: ~/.ssh/id_rsa.pub
+        dest: /home/mcini/.ssh/authorized_keys
+        owner: mcini
+
+    - name: create directory
+      ansible.builtin.file:
+        path: /home/mcini/ops445/lab{{item}}
+        state: directory
+        owner: mcini
+      loop: "{{ lab }}"

@@ -1,0 +1,41 @@
+
+PLAY [Lab 9 config] ************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [mcini]
+
+TASK [Update Apache] ***********************************************************
+ok: [mcini]
+
+TASK [Install epel-release] ****************************************************
+ok: [mcini]
+
+TASK [tree] ********************************************************************
+ok: [mcini]
+
+TASK [set hostname] ************************************************************
+ok: [mcini]
+
+TASK [create new user mcini with sudo] *****************************************
+changed: [mcini]
+
+TASK [create .ssh directory] ***************************************************
+ok: [mcini]
+
+TASK [copy public key to mcini user] *******************************************
+ok: [mcini]
+
+TASK [create directory] ********************************************************
+ok: [mcini] => (item=1)
+ok: [mcini] => (item=2)
+ok: [mcini] => (item=3)
+ok: [mcini] => (item=4)
+ok: [mcini] => (item=5)
+ok: [mcini] => (item=6)
+ok: [mcini] => (item=7)
+ok: [mcini] => (item=8)
+ok: [mcini] => (item=9)
+
+PLAY RECAP *********************************************************************
+mcini                      : ok=9    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
